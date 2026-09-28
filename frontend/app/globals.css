@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+/* This app is light-themed only (no dark mode toggle) — don't follow prefers-color-scheme. */
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  .auth-label {
+    @apply block text-sm font-medium text-violet-deep mb-1.5;
+  }
+  .auth-input {
+    @apply w-full h-12 px-4 rounded-lg border border-beige-border
+           bg-white text-violet-deep placeholder:text-gray-400
+           transition-colors focus:outline-none
+           focus:ring-2 focus:ring-violet-active/30 focus:border-violet-active;
+  }
+  .auth-input-error {
+    @apply border-red-400 focus:ring-red-200/40 focus:border-red-400;
+  }
+
+  /* Two overlapping range inputs sharing one track; only the thumbs receive pointer events. */
+  .range-thumb {
+    pointer-events: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+  }
+  .range-thumb::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    background: transparent;
+  }
+  .range-thumb::-moz-range-track {
+    background: transparent;
+  }
+  .range-thumb::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    pointer-events: auto;
+    width: 16px;
+    height: 16px;
+    border-radius: 9999px;
+    background: white;
+    border: 2px solid #6D28D9;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    margin-top: -1px;
+  }
+  .range-thumb::-moz-range-thumb {
+    pointer-events: auto;
+    width: 16px;
+    height: 16px;
+    border-radius: 9999px;
+    background: white;
+    border: 2px solid #6D28D9;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+  }
+}
