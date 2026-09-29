@@ -1,0 +1,63 @@
+databases:
+  - name: bayam-db
+    plan: free
+    databaseName: bayam
+    user: bayam
+
+services:
+  - type: web
+    name: bayam-backend
+    runtime: docker
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /up
+    envVars:
+      - key: APP_NAME
+        value: BAYAM
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        sync: false
+      - key: APP_URL
+        sync: false
+      - key: APP_LOCALE
+        value: fr
+      - key: APP_FALLBACK_LOCALE
+        value: en
+      - key: LOG_CHANNEL
+        value: stack
+      - key: LOG_LEVEL
+        value: error
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase:
+          name: bayam-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: bayam-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: bayam-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: bayam-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: bayam-db
+          property: password
+      - key: SESSION_DRIVER
+        value: database
+      - key: CACHE_STORE
+        value: database
+      - key: QUEUE_CONNECTION
+        value: database
+      - key: FRONTEND_URL
+        sync: false
